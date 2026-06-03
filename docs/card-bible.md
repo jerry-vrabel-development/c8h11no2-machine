@@ -38,12 +38,21 @@
 - **Animation idle:** [What does it do when shown? bob, sparkle, breathe?]
 - **Flavor text:** "[in-character flavor]"
 - **Lore hook:** [One sentence connecting to real-world chemistry]
+- **Stats (for v1.5 game layer):**
+  - Stability: [1–10] — how hard it is to remove from play
+  - Reactivity: [1–10] — offensive/interaction strength
+  - Mass: [1–10] — board presence / resource cost
+  - Charm: [1–10] — special effect strength / utility
+- **Keyword (for v1.5):** [one keyword, see game-design-future.md]
 - **Edition variants:**
   - Standard: [base notes]
   - Holo: [foil treatment notes]
   - Shiny: [alt palette notes]
   - Gold: [premium treatment]
 ```
+
+> **Note:** Stats and keywords are designed in now but **not used in v1.0**.
+> Locked in here so we don't have to retrofit 33 creatures later.
 
 ---
 

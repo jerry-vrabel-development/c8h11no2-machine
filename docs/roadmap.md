@@ -71,7 +71,25 @@
 - [ ] Fix the top 3 things they trip on
 - [ ] Post somewhere (HN? Show HN?)
 
-## Post-v1 ideas (not commitments)
+## v1.5 — Game layer (planned)
+
+**Goal:** Add a Medium-weight card game that gives cards meaning beyond collecting.
+
+**Scope:**
+- Stats already designed in (card-bible.md)
+- ~15 keywords with light interactions (Marvel Snap-adjacent depth)
+- Solitaire / vs-the-Machine AI opponent only — no multiplayer in v1.5
+- 3-round matches, ~5 min each
+- 10-card decks built from owned collection
+- Wins award molecules → game feeds the pull loop
+- Tutorial mode
+- Light balance pass on initial keyword set
+
+**Exit criteria:** Game mode is fun enough that users play it after a pull, not just to grind molecules.
+
+**Not in v1.5:** PvP, ranked play, tournaments, alternate game modes.
+
+## Post-v1.5 ideas (not commitments)
 
 - **Trading** — between users, no money, possibly via QR-code-encoded card exchanges
 - **Seasonal creatures** — holidays / Nobel announcements bring temporary entries

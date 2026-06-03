@@ -27,6 +27,27 @@
 
 ## Entries
 
+### 2026-XX-XX — Game layer added as v1.5, not v1.0
+
+**Decision:** A Medium-weight card game ships as v1.5, after v1.0 (collection-only) is live and validated. Card-bible.md gets stats and keywords designed in now to avoid retrofitting later.
+
+**Context:** During design refinement, the question arose whether the project is a "dopamine machine that has cards" or a "card game that uses dopamine-machine acquisition." Both are valid, but they're different products. MTG, Pokémon TCG, and Marvel Snap are *all* dopamine machines — the satire actually strengthens with a game layer, not weakens.
+
+**Alternatives considered:**
+- v1.0 ships both together — too much scope, risks shipping nothing
+- Never add a game — caps the design ceiling, cards remain just images
+- Light tier (War-style) — too shallow to give cards real meaning
+- Heavy tier (full TCG) — eats the project
+
+**Trade-offs accepted:**
+- v1.0 stays a sticker album in some users' eyes — fine, the pull is still the centerpiece
+- Card stats designed before they're used → some will be wrong, will need balancing in v1.5
+- Roadmap effectively doubles in length
+
+**Revisit when:** v1.0 ships and we see whether users actually want more depth, or are happy collecting.
+
+---
+
 ### 2026-XX-XX — Card families derive from C₈H₁₁NO₂ atoms
 
 **Decision:** The five card families are Carbon, Hydrogen, Nitrogen, Oxygen, and Dopamine (the full molecule, Mythic only).

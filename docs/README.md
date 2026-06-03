@@ -29,6 +29,7 @@ All planning lives in [`docs/`](docs/):
 | [wireframes.md](docs/wireframes.md) | Screens and IA |
 | [tech-spec.md](docs/tech-spec.md) | Stack, architecture, data model |
 | [roadmap.md](docs/roadmap.md) | Milestones and anti-roadmap |
+| [game-design-future.md](docs/game-design-future.md) | v1.5 game layer (speculative) |
 | [decisions.md](docs/decisions.md) | Running log of design decisions |
 
 Each doc includes a **template usage prompt** at the bottom for working on it with an AI assistant.
