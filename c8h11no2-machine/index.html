@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C8H11NO2 Machine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+
+      <!-- Header -->
+      <header id="header">
+        <span id="formula">C<sub>8</sub>H<sub>11</sub>NO<sub>2</sub></span>
+        <span id="subtitle">dopamine synthesis engine</span>
+      </header>
+
+      <!-- Main stage -->
+      <main id="stage">
+
+        <!-- Tier reveal — empty until a pull -->
+        <div id="reveal">
+          <span id="tier-name"></span>
+        </div>
+
+        <!-- The lever -->
+        <button id="pull-btn" type="button" aria-label="Pull">
+          <span id="pull-label">PULL</span>
+        </button>
+
+        <!-- Molecule counter -->
+        <div id="counter-wrap">
+          <span id="counter-label">molecules</span>
+          <span id="counter">0</span>
+        </div>
+
+      </main>
+
+      <!-- Status line — audio init state -->
+      <footer id="footer">
+        <span id="audio-status">click PULL to initialise audio</span>
+      </footer>
+
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

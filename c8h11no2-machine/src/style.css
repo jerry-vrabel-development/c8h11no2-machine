@@ -1,0 +1,198 @@
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Design tokens ── */
+:root {
+  --bg:           #0a0a0c;
+  --surface:      #111116;
+  --border:       #1e1e28;
+  --text-dim:     #3a3a4a;
+  --text-mid:     #6b6b80;
+  --text:         #c8c8d8;
+  --text-bright:  #e8e8f0;
+
+  /* Tier colours — defined here, applied by JS */
+  --c-common:     #7a9ea8;
+  --c-uncommon:   #6ab87a;
+  --c-rare:       #5b8fd4;
+  --c-epic:       #a06cd5;
+  --c-legendary:  #d4a444;
+  --c-mythic:     #e86060;
+
+  --font: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --pull-size: clamp(120px, 18vw, 180px);
+}
+
+/* ── Base ── */
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+}
+
+/* ── Header ── */
+#header {
+  padding: 24px 32px;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+#formula {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-bright);
+  letter-spacing: 0.06em;
+}
+
+#formula sub {
+  font-size: 0.7em;
+  vertical-align: sub;
+}
+
+#subtitle {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ── Stage ── */
+#stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 48px 24px;
+}
+
+/* ── Tier reveal ── */
+#reveal {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#tier-name {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: transparent;          /* filled by JS via currentColor trick */
+  transition: color 0.2s ease;
+}
+
+/* ── Pull button ── */
+#pull-btn {
+  width: var(--pull-size);
+  height: var(--pull-size);
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  color: var(--text-mid);
+  font-family: var(--font);
+  font-size: clamp(13px, 2vw, 16px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+
+  /* subtle inset ring */
+  box-shadow:
+    inset 0 0 0 1px #ffffff08,
+    0 0 0 0 transparent;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease,
+    transform 0.08s ease;
+}
+
+#pull-btn:hover {
+  border-color: #2e2e3e;
+  color: var(--text);
+  box-shadow:
+    inset 0 0 0 1px #ffffff10,
+    0 0 24px 0 #ffffff06;
+}
+
+#pull-btn:active {
+  transform: scale(0.96);
+  border-color: #3a3a50;
+}
+
+#pull-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Counter ── */
+#counter-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+#counter-label {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+#counter {
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--text-bright);
+  letter-spacing: 0.08em;
+  /* fixed-width so the layout doesn't shift as digits grow */
+  font-variant-numeric: tabular-nums;
+  min-width: 5ch;
+  text-align: center;
+}
+
+/* ── Footer ── */
+#footer {
+  padding: 16px 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+}
+
+#audio-status {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* ── Utility: tier colour classes (set by JS) ── */
+.tier-common     { color: var(--c-common);    }
+.tier-uncommon   { color: var(--c-uncommon);  }
+.tier-rare       { color: var(--c-rare);      }
+.tier-epic       { color: var(--c-epic);      }
+.tier-legendary  { color: var(--c-legendary); }
+.tier-mythic     { color: var(--c-mythic);    }
