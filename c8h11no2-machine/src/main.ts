@@ -127,10 +127,21 @@ async function runPull(forcedTier?: TierDef): Promise<void> {
 // ─────────────────────────────────────────────
 
 function buildDebugPanel(): void {
+  // ── Toggle button (always visible, bottom-right) ──
+  const toggleBtn = document.createElement('button');
+  toggleBtn.id = 'dbg-open-btn';
+  toggleBtn.textContent = 'DBG';
+  toggleBtn.setAttribute('aria-label', 'Toggle debug panel');
+
+  // ── Panel ─────────────────────────────────────────
   const panel = document.createElement('div');
   panel.id = 'debug-panel';
+  panel.setAttribute('aria-hidden', 'true');
   panel.innerHTML = `
-    <div class="dbg-title">debug</div>
+    <div class="dbg-header">
+      <span class="dbg-title">debug</span>
+      <button class="dbg-close" id="dbg-close-btn" aria-label="Close debug panel">✕</button>
+    </div>
 
     <div class="dbg-section">
       <div class="dbg-label">force tier</div>
@@ -169,9 +180,27 @@ function buildDebugPanel(): void {
     </div>
   `;
 
+  document.body.appendChild(toggleBtn);
   document.body.appendChild(panel);
   applyDebugStyles();
   wireDebugPanel(panel);
+
+  // ── Open / close ──────────────────────────────────
+  function openPanel(): void {
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden', 'false');
+    toggleBtn.classList.add('active');
+  }
+  function closePanel(): void {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+    toggleBtn.classList.remove('active');
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    panel.classList.contains('open') ? closePanel() : openPanel();
+  });
+  panel.querySelector('#dbg-close-btn')!.addEventListener('click', closePanel);
 }
 
 function wireDebugPanel(panel: HTMLElement): void {
@@ -225,29 +254,101 @@ function wireDebugPanel(panel: HTMLElement): void {
 function applyDebugStyles(): void {
   const style = document.createElement('style');
   style.textContent = `
-    #debug-panel {
+    /* ── DBG open button ── */
+    #dbg-open-btn {
       position: fixed;
-      top: 16px; right: 16px;
-      width: 210px;
+      bottom: 16px; right: 16px;
+      font-family: var(--font);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      padding: 6px 10px;
       background: #0e0e12;
       border: 1px solid #1e1e28;
-      padding: 12px;
+      color: var(--text-dim);
+      cursor: pointer;
+      z-index: 200;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    #dbg-open-btn:hover,
+    #dbg-open-btn.active {
+      border-color: #3a3a50;
+      color: var(--text-mid);
+    }
+
+    /* ── Panel: mobile-first, slides up from bottom ── */
+    #debug-panel {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: #0e0e12;
+      border-top: 1px solid #1e1e28;
+      padding: 16px 16px 32px;
       font-family: var(--font);
-      font-size: 10px;
+      font-size: 11px;
       color: var(--text-mid);
       letter-spacing: 0.08em;
-      z-index: 100;
+      z-index: 150;
+      transform: translateY(100%);
+      transition: transform 0.25s ease;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    #debug-panel.open {
+      transform: translateY(0);
+    }
+
+    /* ── On desktop: restore original fixed top-right panel ── */
+    @media (min-width: 768px) {
+      #debug-panel {
+        top: 16px; right: 16px;
+        bottom: auto; left: auto;
+        width: 210px;
+        border: 1px solid #1e1e28;
+        border-top: 1px solid #1e1e28;
+        padding: 12px;
+        transform: translateX(calc(100% + 24px));
+        transition: transform 0.2s ease;
+        max-height: none;
+        overflow-y: visible;
+      }
+      #debug-panel.open {
+        transform: translateX(0);
+      }
+      #dbg-open-btn {
+        bottom: auto;
+        top: 16px; right: 16px;
+      }
+      #dbg-open-btn.active {
+        right: calc(210px + 24px);
+      }
+    }
+
+    /* ── Panel header ── */
+    .dbg-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
     }
     .dbg-title {
       font-size: 9px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text-dim);
-      margin-bottom: 12px;
     }
-    .dbg-section {
-      margin-bottom: 14px;
+    .dbg-close {
+      font-family: var(--font);
+      font-size: 11px;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      padding: 0 2px;
+      line-height: 1;
     }
+    .dbg-close:hover { color: var(--text-mid); }
+
+    /* ── Sections ── */
+    .dbg-section { margin-bottom: 14px; }
     .dbg-label {
       font-size: 9px;
       letter-spacing: 0.14em;
@@ -260,24 +361,25 @@ function applyDebugStyles(): void {
     .dbg-tier-btns {
       display: flex;
       flex-wrap: wrap;
-      gap: 4px;
+      gap: 6px;
     }
     .dbg-tier-btn {
       font-family: var(--font);
-      font-size: 9px;
+      font-size: 11px;
       letter-spacing: 0.1em;
-      padding: 3px 6px;
+      padding: 6px 10px;
       background: #111116;
       border: 1px solid #1e1e28;
       cursor: pointer;
       transition: border-color 0.1s;
+      min-height: 36px;
     }
     .dbg-tier-btn:hover { border-color: #3a3a50; }
     .dbg-toggle {
       font-family: var(--font);
-      font-size: 9px;
+      font-size: 11px;
       letter-spacing: 0.1em;
-      padding: 4px 8px;
+      padding: 8px 10px;
       background: #111116;
       border: 1px solid #1e1e28;
       color: var(--text-mid);
@@ -285,6 +387,7 @@ function applyDebugStyles(): void {
       width: 100%;
       text-align: left;
       transition: border-color 0.1s, color 0.1s;
+      min-height: 36px;
     }
     .dbg-toggle.active {
       border-color: #3a3a50;
@@ -296,14 +399,14 @@ function applyDebugStyles(): void {
       width: 100%;
       -webkit-appearance: none;
       appearance: none;
-      height: 2px;
+      height: 3px;
       background: #1e1e28;
       outline: none;
-      margin: 4px 0 4px;
+      margin: 6px 0;
     }
     .dbg-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 10px; height: 10px;
+      width: 18px; height: 18px;
       border-radius: 50%;
       background: var(--text-mid);
       cursor: pointer;
@@ -311,15 +414,15 @@ function applyDebugStyles(): void {
     .dbg-slider-labels {
       display: flex;
       justify-content: space-between;
-      font-size: 8px;
+      font-size: 9px;
       color: var(--text-dim);
       margin-top: 2px;
     }
     .dbg-btn {
       font-family: var(--font);
-      font-size: 9px;
+      font-size: 11px;
       letter-spacing: 0.1em;
-      padding: 4px 8px;
+      padding: 8px 10px;
       background: #111116;
       border: 1px solid #1e1e28;
       color: var(--text-mid);
@@ -327,12 +430,21 @@ function applyDebugStyles(): void {
       width: 100%;
       text-align: left;
       transition: border-color 0.1s, color 0.1s;
+      min-height: 36px;
     }
     .dbg-btn:hover {
       border-color: #3a3a50;
       color: var(--text);
     }
     .dbg-row { display: flex; gap: 6px; }
+
+    /* Desktop: smaller touch targets are fine */
+    @media (min-width: 768px) {
+      .dbg-tier-btn, .dbg-toggle, .dbg-btn { min-height: unset; font-size: 9px; padding: 3px 6px; }
+      .dbg-toggle { padding: 4px 8px; }
+      .dbg-btn { padding: 4px 8px; }
+      .dbg-slider::-webkit-slider-thumb { width: 10px; height: 10px; }
+    }
   `;
   document.head.appendChild(style);
 }
