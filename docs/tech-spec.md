@@ -140,6 +140,23 @@ interface UserState {
 - Analytics (defer; if added, privacy-respecting only — e.g., Plausible)
 - A/B testing infrastructure
 
+## Tone.js gotchas (learned in v0.1 prototype)
+
+Carry these forward to avoid re-learning:
+
+- **Audio context requires user gesture** — initialize Tone.js inside the
+  first button click handler, not on page load.
+- **`await reverb.ready` before scheduling** — Reverb instances have async
+  setup. Scheduling sound through an unready reverb silently fails. Costs
+  ~30 min of debugging.
+- **Pre-warm reverb instances at startup** rather than per-pull. Significant
+  perceived-latency improvement on the first reveal of each tier.
+- **Tick count must be decoupled from molecule reward count** — capped at
+  2–30 regardless of molecules awarded, so a 350-molecule Mythic doesn't
+  tick for 19 seconds.
+- **±2 semitone random variation per repeated sound** is the validated
+  anti-fatigue baseline. Apply to anything that plays >50 times per session.
+
 ## Open technical questions
 
 - React vs Solid — Solid would be lighter for an animation-heavy app, but the ecosystem is smaller.

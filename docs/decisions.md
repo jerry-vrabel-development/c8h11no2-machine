@@ -27,6 +27,26 @@
 
 ## Entries
 
+### 2026-XX-XX — Audio updated, not locked
+
+**Decision:** Update `audio-design.md` with v0.1 prototype values and ship into v0.3 with audio as known-pending refinement, rather than blocking on full validation. Refinement backlog is documented at the top of the audio doc.
+
+**Context:** v0.1 prototype validated the 4-act reveal structure and produced working synth parameters for all six tiers. Two outstanding validations (50-commons fatigue, fresh-ears Mythic) remain unanswered, and no recording was captured. Blocking v0.3 on these would stall the project on subjective polish that is better evaluated when audio is attached to real visuals.
+
+**Alternatives considered:**
+- Lock audio fully before v0.3 — too cautious, stalls forward motion on subjective polish
+- Ignore the gaps — dishonest, would re-emerge as bigger problems at v0.8
+- Restart audio design from scratch — premature, prototype is genuinely good
+
+**Trade-offs accepted:**
+- Audio may need significant rework at v0.8 polish if refinement reveals fatal issues
+- No recording of v0.1 audio exists — future iterations have only synth parameters to recreate the feel from
+- Outside listening sessions deferred to post-v0.3
+
+**Revisit when:** v0.3 ships and audio is attached to real card art + reveals. Run outside listening sessions then.
+
+---
+
 ### 2026-XX-XX — Game layer added as v1.5, not v1.0
 
 **Decision:** A Medium-weight card game ships as v1.5, after v1.0 (collection-only) is live and validated. Card-bible.md gets stats and keywords designed in now to avoid retrofitting later.
