@@ -30,6 +30,7 @@ All planning lives in [`docs/`](docs/):
 | [tech-spec.md](docs/tech-spec.md) | Stack, architecture, data model |
 | [roadmap.md](docs/roadmap.md) | Milestones and anti-roadmap |
 | [game-design-future.md](docs/game-design-future.md) | v1.5 game layer (speculative) |
+| [art-plan.md](docs/art-plan.md) | Art without blocking: art-free playtests, artist partnership, print-and-play card game path |
 | [v0.1-audio-spike.md](docs/v0.1-audio-spike.md) | Audio-first prototype spec + dev handoff prompt |
 | [decisions.md](docs/decisions.md) | Running log of design decisions |
 

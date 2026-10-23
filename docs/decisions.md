@@ -27,6 +27,20 @@
 
 ## Entries
 
+### 2026-10-23 — Art never blocks play; card game goes print-and-play first
+
+**Decision:** Playtest and release the card game with procedurally drawn molecule art first; commission artists from proven demand, on fee + royalty terms with credit on every card. See `art-plan.md`.
+
+**Context:** Art is the main blocker: finding the right artist, paying them fairly, and rewarding them as the project succeeds. The whole project is parked behind Quest Log's development for now.
+
+**Alternatives considered:**
+- Commission all 33 creatures up front — expensive before knowing the game is fun
+- Ship AI-generated art — conflicts with the sourcing decision and with fair treatment of artists
+
+**Trade-offs accepted:** The first public version looks plainer than the final vision.
+
+**Revisit when:** Quest Log is mature enough to work on both, or an artist relationship forms sooner.
+
 ### 2026-XX-XX — Audio updated, not locked
 
 **Decision:** Update `audio-design.md` with v0.1 prototype values and ship into v0.3 with audio as known-pending refinement, rather than blocking on full validation. Refinement backlog is documented at the top of the audio doc.
